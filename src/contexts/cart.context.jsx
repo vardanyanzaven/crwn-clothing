@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 const addItemToList = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
@@ -16,9 +17,13 @@ const addItemToList = (cartItems, productToAdd) => {
 };
 
 const removeItemFromList = (cartItems, cartItemToRemove) => {
-  const existingCartItem = cartItems.find((cartItem) => cartItem.id === cartItemToRemove.id);
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemToRemove.id
+  );
 
-  if(existingCartItem.quantity === 1) {return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id )};
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
+  }
 
   return cartItemToRemove.quantity > 1
     ? cartItems.map((item) =>
@@ -30,8 +35,8 @@ const removeItemFromList = (cartItems, cartItemToRemove) => {
 };
 
 const clearItemFromList = (cartItems, cartItemToDelete) => {
-  return cartItems.filter(item => item.id !== cartItemToDelete.id);
-}
+  return cartItems.filter((item) => item.id !== cartItemToDelete.id);
+};
 
 export const CartContext = createContext({
   isCartOpen: false,
@@ -44,42 +49,83 @@ export const CartContext = createContext({
   total: 0,
 });
 
-export const CartProvider = ({ children }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [itemQuantity, setItemQuantity] = useState(0);
-  const [total, setTotal] = useState(0);
+const INITIAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
+  itemQuantity: 0,
+  total: 0,
+};
 
-  useEffect(() => {
-    const newItemQuantity = cartItems.reduce(
+const cartReducer = (state, { type, payload }) => {
+  switch (type) {
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
+      };
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
+    default:
+      throw new Error(`Unhandled acton type ${type}`);
+  }
+};
+
+const CART_ACTION_TYPES = {
+  SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+  SET_CART_ITEMS: "SET_CART_ITEMS",
+};
+
+export const CartProvider = ({ children }) => {
+  const [{ isCartOpen, cartItems, itemQuantity, total }, dispatch] = useReducer(
+    cartReducer,
+    INITIAL_STATE
+  );
+
+  const updateCartReducer = (newCartItems) => {
+    const newItemQuantity = newCartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0
     );
-    setItemQuantity(newItemQuantity);
-  }, [cartItems]);
-
-  useEffect(() => {
-    const newTotal = cartItems.reduce(
+    const newTotal = newCartItems.reduce(
       (total, cartItem) => total + cartItem.price * cartItem.quantity,
       0
     );
-    setTotal(newTotal);
-  }, [cartItems]);
+
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
+        cartItems: newCartItems,
+        total: newTotal,
+        itemQuantity: newItemQuantity,
+      })
+    );
+  };
+
+  const setIsCartOpen = (bool) =>
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, bool)
+    );
 
   const addItemToCart = (productToAdd) => {
-    setCartItems(addItemToList(cartItems, productToAdd));
+    const newCartItems = addItemToList(cartItems, productToAdd);
+    updateCartReducer(newCartItems);
   };
 
   const removeItemFromCart = (cartItemToRemove) => {
-    setCartItems(removeItemFromList(cartItems, cartItemToRemove));
+    const newCartItems = removeItemFromList(cartItems, cartItemToRemove);
+    updateCartReducer(newCartItems);
   };
 
-  const clearItemFromCart = (cartItemToDelete) =>
-    setCartItems(clearItemFromList(cartItems, cartItemToDelete));
+  const clearItemFromCart = (cartItemToDelete) => {
+    const newCartItems = clearItemFromList(cartItems, cartItemToDelete);
+    updateCartReducer(newCartItems);
+  };
 
   const value = {
-    isDropdownOpen,
-    setIsDropdownOpen,
+    isCartOpen,
+    setIsCartOpen,
     addItemToCart,
     clearItemFromCart,
     removeItemFromCart,

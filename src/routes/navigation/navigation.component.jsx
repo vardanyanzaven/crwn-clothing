@@ -15,7 +15,7 @@ import { NavigationContainer, NavLinks, NavLink, LogoContainer } from "./navigat
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const {isDropdownOpen} = useContext(CartContext);
+  const {isCartOpen} = useContext(CartContext);
 
   const signOutHandler = async () => {
     await signOutUser();
@@ -41,7 +41,7 @@ const Navigation = () => {
           )}
           <CartIcon />
         </NavLinks>
-        {isDropdownOpen &&<CartDropdown />}
+        {isCartOpen &&<CartDropdown />}
       </NavigationContainer>
       <Outlet />
     </Fragment>
