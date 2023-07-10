@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import {
   selectCategoriesMap,
   selectIsCategoriesLoading,
-} from "../../utils/store/categories/categories.selectors";
+} from "../../store/categories/categories.selectors";
 
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 import Spinner from "../../components/spinner/spinner.component";
