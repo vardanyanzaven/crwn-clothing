@@ -21,3 +21,32 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
       return state;
   }
 };
+
+/// Redux Toolkit(addCartItem, removeCartItem and clearCartItem need to be moved here)
+// const cartSlice = createSlice({
+//   name: "cart",
+//   initialState: CART_INITIAL_STATE,
+//   reducers: {
+//     setIsCartOpen(state, { payload }) {
+//       state.isCartOpen = payload;
+//     },
+//     addItemToCart(state, { payload }) {
+//       state.cartItems = addCartItem(state.cartItems, payload);
+//     },
+//     removeItemFromCart(state, { payload }) {
+//       state.cartItems = removeCartItem(state.cartItems, payload);
+//     },
+//     clearItemFromCart(state, { payload }) {
+//       state.cartItems = clearCartItem(state.cartItems, payload);
+//     },
+//   },
+// });
+
+// export const {
+//   setIsCartOpen,
+//   addItemToCart,
+//   removeItemFromCart,
+//   clearItemFromCart,
+// } = cartSlice.actions;
+
+// export const cartReducer = cartSlice.reducer;

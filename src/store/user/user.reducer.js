@@ -31,3 +31,18 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+// Redux Toolkit
+// const userSlice = createSlice({
+//   // name - The name of the slice and what the actions are going to be namespaced with("name/action-name")
+//   name: "user",
+//   initialState: INITIAL_STATE,
+//   reducers: {
+//     setCurrentUser(state, { payload }) {
+//       state.currentUser = payload;
+//     },
+//   },
+// });
+
+// export const { setCurrentUser } = userSlice.actions;
+
+// export const userReducer = userSlice.reducer;
