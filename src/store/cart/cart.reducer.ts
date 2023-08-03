@@ -1,25 +1,34 @@
-import { CART_ACTION_TYPES } from "./cart.types";
+import { AnyAction } from "redux";
+import { CartItem } from "./cart.types";
+import { setCartItems, setIsCartOpen } from "./cart.actions";
 
-const CART_INITIAL_STATE = {
+export type CartState = {
+  readonly isCartOpen: boolean;
+  readonly cartItems: CartItem[];
+}
+
+const CART_INITIAL_STATE: CartState = {
   isCartOpen: false,
   cartItems: [],
 };
 
-export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
-  switch (type) {
-    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
-      return {
+export const cartReducer = (state = CART_INITIAL_STATE, action: AnyAction): CartState => {
+  if (
+    setCartItems.match(action)
+  ) {
+    return {
         ...state,
-        isCartOpen: payload,
-      };
-    case CART_ACTION_TYPES.SET_CART_ITEMS:
-      return {
-        ...state,
-        cartItems: payload,
-      };
-    default:
-      return state;
+        cartItems: action.payload,
+    };
   }
+  if(setIsCartOpen.match(action)) {
+    return {
+        ...state,
+        isCartOpen: action.payload,
+    }
+  }
+
+  return state;
 };
 
 /// Redux Toolkit(addCartItem, removeCartItem and clearCartItem need to be moved here)

@@ -16,7 +16,7 @@ import {
   NavLink,
   LogoContainer,
 } from "./navigation.styles";
-import { userSignOutStart } from "../../store/user/user.actions";
+import { signOutStart } from "../../store/user/user.actions";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const Navigation = () => {
   const isCartOpen = useSelector(selectIsCartOpen);
 
   const signOutHandler = () => {
-    dispatch(userSignOutStart());
+    dispatch(signOutStart());
   };
   return (
     <Fragment>
@@ -35,7 +35,7 @@ const Navigation = () => {
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (
-            <NavLink as="span" onClick={signOutHandler}>
+            <NavLink as="span" to="#" onClick={signOutHandler}>
               SIGN OUT
             </NavLink>
           ) : (

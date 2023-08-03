@@ -13,7 +13,7 @@ import {
   BaseSpan,
   RemoveButton,
   Value,
-} from "./checkout-item.styles.jsx";
+} from "./checkout-item.styles";
 import { selectCartItems } from "../../store/cart/cart.selectors";
 
 const CheckoutItem = ({ cartItem }) => {
