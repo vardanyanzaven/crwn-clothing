@@ -3,7 +3,6 @@ import {FormInputLabel, Group, Input} from "./form-input.styles";
 
 export type FormInputProps = {
   label: string;
-  // inputProps: InputHTMLAttributes<HTMLInputElement>;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const FormInput = ({ label, ...inputProps }: FormInputProps) => {

@@ -1,8 +1,16 @@
+import {FC} from "react";
 import { Link } from "react-router-dom";
+
 import ProductCard from "../product-card/product-card.component";
 import { CatPreviewContainer, Title, Preview } from "./category-preview.styles";
+import { CategoryItem } from "../../store/categories/categories.types";
 
-const CategoryPreview = ({ title, products }) => {
+type CategoryPreviewProps = {
+  title: string;
+  items: CategoryItem[];
+}
+
+const CategoryPreview: FC<CategoryPreviewProps> = ({ title, items }) => {
   return (
     <CatPreviewContainer>
       <Title>
@@ -11,10 +19,10 @@ const CategoryPreview = ({ title, products }) => {
         </Link>
       </Title>
       <Preview>
-        {products
-          .filter((_, i) => i < 4)
-          .map((product) => (
-            <ProductCard key={product.id} product={product} />
+        {items
+          .filter((_: unknown, i: number) => i < 4)
+          .map((item: CategoryItem) => (
+            <ProductCard key={item.id} product={item} />
           ))}
       </Preview>
     </CatPreviewContainer>
