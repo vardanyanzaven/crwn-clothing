@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type BgImageProps = {
-  imageUrl: string;
+  imageurl: string;
 }
 
 export const BgImage = styled.div<BgImageProps>`
@@ -9,7 +9,7 @@ export const BgImage = styled.div<BgImageProps>`
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageurl }) => `url(${imageurl})`};
 `;
 
 export const Body = styled.div`
@@ -68,5 +68,9 @@ export const DirItemContainer = styled.div`
 
   &:last-child {
     margin-left: 7.5px;
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 200px
   }
 `;
