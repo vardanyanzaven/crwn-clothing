@@ -6,13 +6,6 @@ export type FormInputProps = {
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const FormInput = ({ label, ...inputProps }: FormInputProps) => {
-  console.log(
-    Boolean(
-      inputProps.value &&
-        typeof inputProps.value === "string" &&
-        inputProps.value.length
-    )
-  );
   return (
     <Group>
       <Input {...inputProps} />

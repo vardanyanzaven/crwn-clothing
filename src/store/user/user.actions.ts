@@ -8,6 +8,7 @@ import {
 } from "../../utils/reducer/reducer.utils";
 import { ExtraInfo, UserData } from "../../utils/firebase/firebase.utils";
 
+// Action types
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
 export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, UserData>;
 export type GoogleSignInStart = Action<USER_ACTION_TYPES.GOOGLE_SIGN_IN_START>;
@@ -23,6 +24,7 @@ export type SignOutStart = Action<USER_ACTION_TYPES.SIGN_OUT_START>;
 export type SignOutSuccess = Action<USER_ACTION_TYPES.SIGN_OUT_SUCCESS>;
 export type SignOutFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_OUT_FAILED, Error>;
 
+// Action creators
 export const setCurrentUser = withMatcher((user: UserData): SetCurrentUser =>
   createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user)
 );

@@ -32,9 +32,10 @@ const Button = ({
   isLoading,
   ...otherProps
 }: ButtonProps) => {
+
   const CustomButton = getButton(buttonType);
   return (
-    <CustomButton disabled={isLoading} {...otherProps}>
+    <CustomButton data-testid={`button-${!buttonType ? "base" : buttonType}`} disabled={isLoading} {...otherProps}>
       {isLoading ? <ButtonSpinner /> : children}
     </CustomButton>
   );

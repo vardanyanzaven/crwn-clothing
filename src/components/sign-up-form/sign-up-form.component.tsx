@@ -56,6 +56,7 @@ const SignUpForm = () => {
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
+          data-testid="display-name"
           label="Display Name"
           type="text"
           onChange={handleChange}
@@ -64,6 +65,7 @@ const SignUpForm = () => {
           required
         />
         <FormInput
+          data-testid="email"
           label="Email"
           type="email"
           onChange={handleChange}
@@ -72,6 +74,7 @@ const SignUpForm = () => {
           required
         />
         <FormInput
+          data-testid="password"
           label="Password"
           type="password"
           onChange={handleChange}
@@ -80,6 +83,7 @@ const SignUpForm = () => {
           required
         />
         <FormInput
+          data-testid="confirm-password"
           label="Confirm Password"
           type="password"
           onChange={handleChange}

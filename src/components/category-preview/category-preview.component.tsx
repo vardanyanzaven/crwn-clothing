@@ -18,7 +18,7 @@ const CategoryPreview: FC<CategoryPreviewProps> = ({ title, items }) => {
           {title.toUpperCase()}
         </Link>
       </Title>
-      <Preview>
+      <Preview data-testid="preview">
         {items
           .filter((_: unknown, i: number) => i < 4)
           .map((item: CategoryItem) => (

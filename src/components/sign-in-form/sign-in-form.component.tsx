@@ -43,7 +43,6 @@ const SignInForm = () => {
     try {
       dispatch(emailSignInStart(email, password));
       resetFormFields();
-      navigate("/");
     } catch (error) {
       switch ((error as AuthError).code) {
         case AuthErrorCodes.INVALID_PASSWORD:
@@ -53,7 +52,7 @@ const SignInForm = () => {
           alert("No user associated with this email");
           break;
         default:
-          console.log(error);
+         alert(error);
       }
     }
   };
@@ -64,6 +63,7 @@ const SignInForm = () => {
       <span>Sign in with your email and password</span>
       <form onSubmit={(e) => handleSubmit(e)}>
         <FormInput
+          data-testid="email-input"
           label="Email"
           type="email"
           onChange={handleChange}
@@ -72,6 +72,7 @@ const SignInForm = () => {
           required
         />
         <FormInput
+          data-testid="password-input"
           label="Password"
           type="password"
           onChange={handleChange}
@@ -80,8 +81,11 @@ const SignInForm = () => {
           required
         />
         <ButtonsContainer>
-          <Button type="submit">Sign In</Button>
+          <Button data-testid="sign-in" type="submit">
+            Sign In
+          </Button>
           <Button
+            data-testid="google-sign-in"
             type="button"
             buttonType={BUTTON_TYPE_CLASSES.google}
             onClick={signInWithGoogle}

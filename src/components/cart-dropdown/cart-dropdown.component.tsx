@@ -14,7 +14,6 @@ import { selectCartItems } from "../../store/cart/cart.selectors";
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
-  const [count, setCount] = useState(0);
 
   const goToCheckoutHandler = useCallback(() => {
     navigate("/checkout");

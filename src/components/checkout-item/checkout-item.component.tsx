@@ -43,12 +43,18 @@ const CheckoutItem: FC<CheckoutItemProps> = memo(({ cartItem }) => {
       </ImgContainer>
       <BaseSpan>{name}</BaseSpan>
       <Quantity>
-        <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
+        <Arrow data-testid="reduce-quantity" onClick={removeItemHandler}>
+          &#10094;
+        </Arrow>
         <Value>{quantity}</Value>
-        <Arrow onClick={addItemHandler}>&#10095;</Arrow>
+        <Arrow data-testid="increase-quantity" onClick={addItemHandler}>
+          &#10095;
+        </Arrow>
       </Quantity>
       <BaseSpan>{price}</BaseSpan>
-      <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
+      <RemoveButton data-testid="remove-item" onClick={clearItemHandler}>
+        &#10005;
+      </RemoveButton>
     </CheckoutItemContainer>
   );
 });
